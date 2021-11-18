@@ -1,27 +1,31 @@
 import {NgModule} from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 
-import { AppComponent } from './app.component';
-import { FloorComponent } from './floor/floor.component';
+import {AppComponent} from './app.component';
+import {FloorComponent} from './floor/floor.component';
 import {HttpClientModule} from "@angular/common/http";
-import { Floor1Component } from './floor1/floor1.component';
-import { Floor2Component } from './floor2/floor2.component';
+import {Floor0Component} from "./floor0/floor0.component";
+import {Floor1Component} from './floor1/floor1.component';
+import {Floor2Component} from './floor2/floor2.component';
+import {Floor3Component} from "./floor3/floor3.component";
 import {ReactiveFormsModule} from "@angular/forms";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    FloorComponent,
-    Floor1Component,
-    Floor2Component,
-  ],
-  imports: [
-    BrowserAnimationsModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        FloorComponent,
+        Floor0Component,
+        Floor1Component,
+        Floor2Component,
+        Floor3Component,
+    ],
+    imports: [
+        BrowserAnimationsModule,
+        HttpClientModule,
+        ReactiveFormsModule,
+    ],
+    providers: [],
+    bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

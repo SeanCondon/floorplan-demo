@@ -46,13 +46,6 @@ export class FloorComponent implements OnChanges {
   @Input() layers: string[] = [];
   @Input() isometric: boolean = false;
 
-  skewX: number = 0;
-  skewY: number = 0;
-  scaleX: number = 1.0;
-  scaleY: number = 1.0;
-  translateX: number = 0;
-  translateY: number = 0;
-
   constructor(
   ) {
   }

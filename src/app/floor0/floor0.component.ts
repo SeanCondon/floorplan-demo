@@ -17,9 +17,9 @@
 import {Component, Input} from '@angular/core';
 
 @Component({
-    selector: '[app-floor1]',
-    templateUrl: './floor-1.svg',
+    selector: '[app-floor0]',
+    templateUrl: './floor-0.svg',
     styleUrls: []
 })
-export class Floor1Component {
+export class Floor0Component {
 }

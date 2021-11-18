@@ -14,12 +14,13 @@
  * limitations under the License.
  */
 
-import {Component, Input} from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
-    selector: '[app-floor1]',
-    templateUrl: './floor-1.svg',
+    selector: '[app-floor3]',
+    templateUrl: './floor-3.svg',
     styleUrls: []
 })
-export class Floor1Component {
+export class Floor3Component {
+
 }

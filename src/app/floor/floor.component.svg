@@ -15,5 +15,5 @@
 -->
 <svg:g xmlns:svg="http://www.w3.org/2000/svg">
   <svg:desc>Floor {{title}}</svg:desc>
-  <svg:g app-floor1 [@isometricToggle]="isometric" [attr.transform]="'translate(' + translateX + ' ' + translateY + '), scale(' + scaleX + '' + scaleY + '), skewX(' + skewX + '), skewY(' + skewY + ')'"></svg:g>
+  <svg:g app-floor1 [@isometricToggle]="isometric"></svg:g>
 </svg:g>

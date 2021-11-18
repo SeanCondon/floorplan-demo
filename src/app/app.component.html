@@ -18,6 +18,7 @@
 <input type="button" (click)="toggleIsometric(false)" value="Plan" [disabled]="!isometric">
 <svg:svg xmlns:svg="http://www.w3.org/2000/svg" viewBox="0 0 900 600"
          transform="'translate(0,0), scale(1.0)'">
-  <svg:desc>Floors</svg:desc>
-  <svg:g app-floor [title]="'Floor 1'" [isometric]="this.isometric" [layers]="['Walls', 'Text', 'Devices', 'SmallCells', 'Beam']"></svg:g>
+    <svg:desc>Floors</svg:desc>
+    <svg:g app-floor [title]="'Building Demo'" [isometric]="this.isometric"
+           [layers]="['Walls', 'Text', 'Devices', 'SmallCells', 'Beam']"></svg:g>
 </svg:svg>
