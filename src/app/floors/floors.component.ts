@@ -23,17 +23,17 @@ import {
 } from '@angular/core';
 import {animate, state, style, transition, trigger} from "@angular/animations";
 
-const Isometric_Offset = 100;
-const TOP_BORDER = 30;
+const Isometric_Offset = -120;
+const TOP_BORDER = 0;
 
 @Component({
-    selector: '[app-floor]',
-    templateUrl: 'floor.component.svg',
-    styleUrls: ['./floor.component.scss'],
+    selector: '[app-floors]',
+    templateUrl: 'floors.component.svg',
+    styleUrls: ['./floors.component.scss'],
     animations: [
         trigger('isometricToggle', [
             state('isometric', style({
-                transform: 'skewX(-40deg) skewY(10deg) translateX(400px) translateY(80px) scaleX(0.6) scaleY(0.2)'
+                transform: 'skewX(-40deg) skewY(10deg) translateX(600px) translateY(250px) scaleX(0.6) scaleY(0.4)'
             })),
             state('*', style({
                 transform: 'skewX(0deg) skewY(0deg) translateX(0px) translateY(0px) scaleX(1.0) scaleY(1.0)'
@@ -44,7 +44,7 @@ const TOP_BORDER = 30;
         ])
     ],
 })
-export class FloorComponent {
+export class FloorsComponent {
     @Input() title: string = '';
     @Input() layers: string[] = [];
     @Input() floorNames: string[] = [];

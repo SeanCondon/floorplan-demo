@@ -16,6 +16,7 @@
 
 import {Component, Input} from '@angular/core';
 
+// Floor0Component - this would be compiled dynamically in future
 @Component({
     selector: '[app-floor1]',
     templateUrl: './floor-1.svg',

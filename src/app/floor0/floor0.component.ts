@@ -15,8 +15,8 @@
  */
 
 import {Component, Input} from '@angular/core';
-import {animate, state, style, transition, trigger} from "@angular/animations";
 
+// Floor0Component - this would be compiled dynamically in future
 @Component({
     selector: '[app-floor0]',
     templateUrl: './floor-0.svg',

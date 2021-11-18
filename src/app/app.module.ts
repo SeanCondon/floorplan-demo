@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
-import {FloorComponent} from './floor/floor.component';
+import {FloorsComponent} from './floors/floors.component';
 import {HttpClientModule} from "@angular/common/http";
 import {Floor0Component} from "./floor0/floor0.component";
 import {Floor1Component} from './floor1/floor1.component';
@@ -13,7 +13,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 @NgModule({
     declarations: [
         AppComponent,
-        FloorComponent,
+        FloorsComponent,
         Floor0Component,
         Floor1Component,
         Floor2Component,
