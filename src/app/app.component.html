@@ -14,11 +14,18 @@
 ~ limitations under the License.
 -->
 <p>Floor Plan Demo</p>
-<input type="button" (click)="toggleIsometric(true)" value="Isometric" [disabled]="isometric">
-<input type="button" (click)="toggleIsometric(false)" value="Plan" [disabled]="!isometric">
-<svg:svg xmlns:svg="http://www.w3.org/2000/svg" viewBox="0 0 900 600"
+<input type="checkbox" #walls id="walls" name="walls" [checked]="layers.includes('Walls')" value="Walls" (click)="enableLayer(walls.value, walls.checked)">
+<label for="walls">Walls</label><br>
+<input type="checkbox" #text id="text" name="text"  [checked]="layers.includes('Text')" value="Text" (click)="enableLayer(text.value, text.checked)">
+<label for="text">Text</label><br>
+<input type="checkbox" #smallcells id="smallcells" name="smallcells" [checked]="layers.includes('SmallCells')" value="SmallCells" (click)="enableLayer(smallcells.value, smallcells.checked)">
+<label for="smallcells">Small Cells</label><br>
+<input type="checkbox" #beam id="beam" name="beam" [checked]="layers.includes('Beam')" value="Beam" (click)="enableLayer(beam.value, beam.checked)">
+<label for="beam">Beam</label><br>
+<input type="checkbox" #devices id="devices" name="devices" [checked]="layers.includes('Devices')" value="Devices" (click)="enableLayer(devices.value, devices.checked)">
+<label for="devices">Devices</label><br>
+<svg:svg xmlns:svg="http://www.w3.org/2000/svg" viewBox="0 0 1150 800"
          transform="'translate(0,0), scale(1.0)'">
-    <svg:desc>Floors</svg:desc>
-    <svg:g app-floor [title]="'Building Demo'" [isometric]="this.isometric"
-           [layers]="['Walls', 'Text', 'Devices', 'SmallCells', 'Beam']"></svg:g>
+    <svg:g app-floor [title]="'Building Demo'"
+           [layers]="layers"></svg:g>
 </svg:svg>

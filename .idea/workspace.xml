@@ -5,15 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d92d4292-79bb-4395-b90d-7dd592993c22" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.module.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/floor/floor.component.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/floor/floor.component.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/floor/floor.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/floor/floor.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/floor0/floor-0.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/floor0/floor-0.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/floor0/floor-1.bak" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/floor0/floor0.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/floor0/floor0.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/floor1/floor-1.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/floor1/floor-1.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/floor1/floor1.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/floor1/floor1.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/floor2/floor-2.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/floor2/floor-2.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/floor2/floor2.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/floor2/floor2.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/floor3/floor-3.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/floor3/floor-3.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/floor3/floor3.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/floor3/floor3.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,6 +34,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -86,12 +92,26 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1637142527749</updated>
-      <workItem from="1637142529578" duration="25695000" />
+      <workItem from="1637142529578" duration="36254000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

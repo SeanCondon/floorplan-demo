@@ -31,7 +31,7 @@
    inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)"
    sodipodi:docname="floor-2.svg">
   <title
-     id="title952">Floor Plan sample - floor-1</title>
+     id="title952">Floor Plan sample - floor-2</title>
   <defs
      id="defs2">
     <linearGradient
@@ -139,7 +139,7 @@
      inkscape:groupmode="layer"
      id="layer6"
      inkscape:label="Walls"
-     style="display:inline">
+     [style]="layers.includes('Walls') ? 'display:inline' : 'display:none'">
     <rect
        style="opacity:1;fill:none;fill-opacity:0.86764706;stroke:#000000;stroke-width:0.35681203;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect895"
@@ -189,7 +189,7 @@
      inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="SmallCells"
-     style="display:inline">
+     [style]="layers.includes('SmallCells') ? 'display:inline' : 'display:none'">
     <circle
        r="5.2916665"
        cy="24.867588"
@@ -242,7 +242,7 @@
        inkscape:groupmode="layer"
        id="layer5"
        inkscape:label="Beam"
-       style="display:inline">
+       [style]="layers.includes('Beam') ? 'display:inline' : 'display:none'">
       <circle
          style="display:inline;fill:url(#radialGradient4713-2);fill-opacity:1;stroke:none;stroke-width:0.34471515;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
          id="path4694-9"
@@ -297,7 +297,7 @@
      inkscape:groupmode="layer"
      id="layer4"
      inkscape:label="Text"
-     style="display:inline">
+     [style]="layers.includes('Text') ? 'display:inline' : 'display:none'">
     <text
        transform="translate(0,-96.999999)"
        xml:space="preserve"
@@ -356,7 +356,7 @@
      inkscape:groupmode="layer"
      id="layer3"
      inkscape:label="Devices"
-     style="display:inline">
+     [style]="layers.includes('Devices') ? 'display:inline' : 'display:none'">
     <path
        sodipodi:type="star"
        style="fill:#9aa9ee;fill-opacity:1;stroke:#000000;stroke-width:0.5;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"

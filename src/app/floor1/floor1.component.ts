@@ -22,4 +22,6 @@ import {Component, Input} from '@angular/core';
     styleUrls: []
 })
 export class Floor1Component {
+    @Input() layers: string[] = [];
+
 }

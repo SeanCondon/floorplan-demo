@@ -22,9 +22,13 @@ import {Component} from '@angular/core';
     styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-    public isometric = false;
+    public layers: string[] = ['Walls','Text','SmallCells','Beam','Devices'];
 
-    public toggleIsometric(value: boolean): void {
-        this.isometric = value
+    public enableLayer(name: string, checked: boolean): void {
+        if (checked && this.layers.indexOf(name) === -1) {
+            this.layers.push(name);
+        } else if (!checked && this.layers.indexOf(name) !== -1) {
+            this.layers.splice(this.layers.indexOf(name), 1);
+        }
     }
 }

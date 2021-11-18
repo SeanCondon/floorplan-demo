@@ -97,7 +97,7 @@
      inkscape:groupmode="layer"
      id="layer1"
      transform="translate(0,-97)"
-     style="display:inline">
+     [style]="layers.includes('Walls') ? 'display:inline' : 'display:none'">
     <rect
        id="rect3715"
        width="285.75"
@@ -168,7 +168,7 @@
      inkscape:groupmode="layer"
      id="layer4"
      inkscape:label="Text"
-     style="display:inline">
+     [style]="layers.includes('Text') ? 'display:inline' : 'display:none'">
     <text
        transform="translate(0,-96.999999)"
        xml:space="preserve"
@@ -281,7 +281,7 @@
      inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="SmallCells"
-     style="display:inline">
+     [style]="layers.includes('SmallCells') ? 'display:inline' : 'display:none'">
     <circle
        style="fill:#62b800;fill-opacity:1;stroke:#000000;stroke-width:0.5;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="path4538"
@@ -310,7 +310,7 @@
        inkscape:groupmode="layer"
        id="layer5"
        inkscape:label="Beam"
-       style="display:inline">
+       [style]="layers.includes('Beam') ? 'display:inline' : 'display:none'">
       <circle
          style="display:inline;fill:url(#radialGradient4713);fill-opacity:1;stroke:none;stroke-width:0.5;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
          id="path4694"
@@ -341,7 +341,7 @@
      inkscape:groupmode="layer"
      id="layer3"
      inkscape:label="Devices"
-     style="display:inline">
+     [style]="layers.includes('Devices') ? 'display:inline' : 'display:none'">
     <path
        sodipodi:type="star"
        style="fill:#9aa9ee;fill-opacity:1;stroke:#000000;stroke-width:0.5;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
