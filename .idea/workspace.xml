@@ -10,7 +10,6 @@
       <change beforePath="$PROJECT_DIR$/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/floor/floor.component.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/floor/floor.component.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/floor/floor.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/floor/floor.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/floor0/floor-0.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/floor0/floor-0.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/floor0/floor-1.bak" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/floor0/floor0.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/floor0/floor0.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/floor1/floor-1.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/floor1/floor-1.svg" afterDir="false" />

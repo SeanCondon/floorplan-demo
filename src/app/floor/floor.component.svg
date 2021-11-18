@@ -14,34 +14,35 @@
 ~ limitations under the License.
 -->
 <svg:g xmlns:svg="http://www.w3.org/2000/svg">
-    <svg:desc>{{title}} {{viewMode}}</svg:desc>
-    <svg:g (click)="viewMode = 'isometric'">
-        <svg:path d="M 10,0 l0,20 l20,0 M10,20 l16,-12" stroke="black" fill-opacity="0">
-            <svg:title>Isometric View</svg:title>
-        </svg:path>
-    </svg:g>
-    <svg:polygon points="50,10 70,20 70,0" stroke="black" (click)="navigateViewMode(false)">
-        <svg:title>Lower floor</svg:title>
-    </svg:polygon>
-    <svg:polygon points="80,0 80,20 100,10" stroke="black" (click)="navigateViewMode(true)">
-        <svg:title>Higher Floor</svg:title>
-    </svg:polygon>
-    <svg:text x="120" y="20">{{title}} - {{viewMode}}</svg:text>
-    <svg:text *ngIf="viewMode === 'isometric'" x="120" y="40">(Click on floor for plan view)</svg:text>
+    <!-- if we wanted to represent the controls as SVG -->
+<!--    <svg:desc>{{title}} {{viewMode}}</svg:desc>-->
+<!--    <svg:g (click)="viewMode = 'isometric'">-->
+<!--        <svg:path d="M 10,0 l0,20 l20,0 M10,20 l16,-12" stroke="black" fill-opacity="0">-->
+<!--            <svg:title>Isometric View</svg:title>-->
+<!--        </svg:path>-->
+<!--    </svg:g>-->
+<!--    <svg:polygon points="50,10 70,20 70,0" stroke="black" (click)="navigateViewMode(false)">-->
+<!--        <svg:title>Lower floor</svg:title>-->
+<!--    </svg:polygon>-->
+<!--    <svg:polygon points="80,0 80,20 100,10" stroke="black" (click)="navigateViewMode(true)">-->
+<!--        <svg:title>Higher Floor</svg:title>-->
+<!--    </svg:polygon>-->
+<!--    <svg:text x="120" y="20">{{title}} - {{viewMode}}</svg:text>-->
+<!--    <svg:text *ngIf="viewMode === 'isometric'" x="120" y="40">(Click on floor for plan view)</svg:text>-->
     <svg:g [attr.transform]="'translate(0,' + isoMetricOffset('floor-0') + '), scale(1.0,' + floorDisplay('floor-0') + ')'"
-           (click)="viewMode = 'floor-0'">
+           (click)="floorSelected('floor-0')">
         <svg:g app-floor0 [@isometricToggle]="viewMode" [layers]="layers"></svg:g>
     </svg:g>
     <svg:g [attr.transform]="'translate(0,' + isoMetricOffset('floor-1') + '), scale(1.0,' + floorDisplay('floor-1') + ')'"
-           (click)="viewMode = 'floor-1'">
+           (click)="floorSelected('floor-1')">
         <svg:g app-floor1 [@isometricToggle]="viewMode" [layers]="layers"></svg:g>
     </svg:g>
     <svg:g [attr.transform]="'translate(0, ' + isoMetricOffset('floor-2') + '), scale(1.0,' + floorDisplay('floor-2') + ')'"
-           (click)="viewMode = 'floor-2'">
+           (click)="floorSelected('floor-2')">
         <svg:g app-floor2 [@isometricToggle]="viewMode" [layers]="layers"></svg:g>
     </svg:g>
     <svg:g [attr.transform]="'translate(0, ' + isoMetricOffset('floor-3') + '), scale(1.0,' + floorDisplay('floor-3') + ')'"
-           (click)="viewMode = 'floor-3'">
+           (click)="floorSelected('floor-3')">
         <svg:g app-floor3 [@isometricToggle]="viewMode" [layers]="layers"></svg:g>
     </svg:g>
 </svg:g>

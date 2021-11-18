@@ -16,9 +16,9 @@
 
 import {
     AfterViewInit,
-    Component,
+    Component, EventEmitter,
     Input,
-    OnChanges,
+    OnChanges, Output,
     SimpleChanges,
 } from '@angular/core';
 import {animate, state, style, transition, trigger} from "@angular/animations";
@@ -39,33 +39,19 @@ const TOP_BORDER = 30;
                 transform: 'skewX(0deg) skewY(0deg) translateX(0px) translateY(0px) scaleX(1.0) scaleY(1.0)'
             })),
             // default
-            transition('0 => 1', animate('500ms ease-in')),
-            transition('* => 0', animate('500ms ease-out'))
+            transition('isometric => *', animate('500ms ease-in')),
+            transition('* => isometric', animate('500ms ease-out'))
         ])
     ],
 })
-export class FloorComponent implements OnChanges {
+export class FloorComponent {
     @Input() title: string = '';
     @Input() layers: string[] = [];
-    public viewMode: string = "isometric";
-    private floorNames = ['floor-0', 'floor-1', 'floor-2', 'floor-3'];
+    @Input() floorNames: string[] = [];
+    @Input() viewMode: string = "isometric";
+    @Output() floorSelectedEmitter = new EventEmitter<string>();
 
     constructor() {
-    }
-
-    ngOnChanges(changes: SimpleChanges): void {
-
-    }
-
-    navigateViewMode(up: boolean) {
-        if (this.floorNames.includes(this.viewMode)) {
-            const idx = this.floorNames.indexOf(this.viewMode);
-            if (idx > 0 && !up) {
-                this.viewMode = this.floorNames[idx-1];
-            } else if (idx < this.floorNames.length-1 && up) {
-                this.viewMode = this.floorNames[idx+1];
-            }
-        }
     }
 
     isoMetricOffset(floor: string): number {
@@ -80,5 +66,9 @@ export class FloorComponent implements OnChanges {
             return 1;
         }
         return 0;
+    }
+
+    floorSelected(floor: string): void {
+        this.floorSelectedEmitter.emit(floor);
     }
 }

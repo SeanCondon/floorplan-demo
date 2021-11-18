@@ -20,20 +20,7 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
 @Component({
     selector: '[app-floor0]',
     templateUrl: './floor-0.svg',
-    styleUrls: [],
-    animations: [
-        trigger('isometricToggle', [
-            state('isometric', style({
-                transform: 'skewX(-40deg) skewY(10deg) translateX(400px) translateY(80px) scaleX(0.6) scaleY(0.2)'
-            })),
-            state('*', style({
-                transform: 'skewX(0deg) skewY(0deg) translateX(0px) translateY(0px) scaleX(1.0) scaleY(1.0)'
-            })),
-            // default
-            transition('0 => 1', animate('500ms ease-in')),
-            transition('* => 0', animate('500ms ease-out'))
-        ])
-    ],
+    styleUrls: []
 })
 export class Floor0Component {
     @Input() layers: string[] = [];

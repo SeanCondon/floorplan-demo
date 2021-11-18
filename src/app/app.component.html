@@ -14,18 +14,34 @@
 ~ limitations under the License.
 -->
 <p>Floor Plan Demo</p>
-<input type="checkbox" #walls id="walls" name="walls" [checked]="layers.includes('Walls')" value="Walls" (click)="enableLayer(walls.value, walls.checked)">
-<label for="walls">Walls</label><br>
+<span>Layers: </span>
+<!-- no need to toggle Walls -->
+<!--<input type="checkbox" #walls id="walls" name="walls" [checked]="layers.includes('Walls')" value="Walls" (click)="enableLayer(walls.value, walls.checked)">-->
+<!--<label for="walls">Walls</label>&nbsp;-->
 <input type="checkbox" #text id="text" name="text"  [checked]="layers.includes('Text')" value="Text" (click)="enableLayer(text.value, text.checked)">
-<label for="text">Text</label><br>
+<label for="text">Text</label>&nbsp;
 <input type="checkbox" #smallcells id="smallcells" name="smallcells" [checked]="layers.includes('SmallCells')" value="SmallCells" (click)="enableLayer(smallcells.value, smallcells.checked)">
-<label for="smallcells">Small Cells</label><br>
+<label for="smallcells">Small Cells</label>&nbsp;
 <input type="checkbox" #beam id="beam" name="beam" [checked]="layers.includes('Beam')" value="Beam" (click)="enableLayer(beam.value, beam.checked)">
-<label for="beam">Beam</label><br>
+<label for="beam">Beam</label>&nbsp;
 <input type="checkbox" #devices id="devices" name="devices" [checked]="layers.includes('Devices')" value="Devices" (click)="enableLayer(devices.value, devices.checked)">
 <label for="devices">Devices</label><br>
+
+<span>View Mode</span>
+<input type="radio" id="isometric" name="viewMode" value="isometric" [checked]="viewMode === 'isometric'" (click)="viewMode = 'isometric'">
+<label for="isometric">Isometric</label>&nbsp;
+<input type="radio" id="floor-0" name="viewMode" value="floor-0" [checked]="viewMode === 'floor-0'" (click)="viewMode = 'floor-0'">
+<label for="floor-1">Floor-0</label>&nbsp;
+<input type="radio" id="floor-1" name="viewMode" value="floor-1" [checked]="viewMode === 'floor-1'" (click)="viewMode = 'floor-1'">
+<label for="floor-1">Floor-1</label>&nbsp;
+<input type="radio" id="floor-2" name="viewMode" value="floor-2" [checked]="viewMode === 'floor-2'" (click)="viewMode = 'floor-2'">
+<label for="floor-1">Floor-2</label>&nbsp;
+<input type="radio" id="floor-3" name="viewMode" value="floor-3" [checked]="viewMode === 'floor-3'" (click)="viewMode = 'floor-3'">
+<label for="floor-1">Floor-3</label><br>
+
+
 <svg:svg xmlns:svg="http://www.w3.org/2000/svg" viewBox="0 0 1150 800"
          transform="'translate(0,0), scale(1.0)'">
     <svg:g app-floor [title]="'Building Demo'"
-           [layers]="layers"></svg:g>
+           [layers]="layers" [floorNames]="floorNames" [viewMode]="viewMode" (floorSelectedEmitter)="viewMode = $event"></svg:g>
 </svg:svg>
