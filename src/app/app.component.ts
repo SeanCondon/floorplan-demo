@@ -14,17 +14,72 @@
  * limitations under the License.
  */
 
-import { Component } from "@angular/core";
+import {
+  Compiler,
+  Component,
+  Input,
+  NgModule,
+  OnInit,
+  ViewChild,
+  ViewContainerRef,
+} from "@angular/core";
+import { ApiService } from "../openapi3/config/services/api.service";
+import { AetherModel } from "../openapi3/config/models/aether-model";
+import { environment } from "../environments/environment";
+import { Site } from "../openapi3/config/models/site";
+import { map } from "rxjs/operators";
+import { HttpClient } from "@angular/common/http";
+import { SitePlanDirective } from "./site-plan.directive";
 
 @Component({
   selector: "aether-root",
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.scss"],
 })
-export class AppComponent {
-  public layers: string[] = ["Walls", "Text", "SmallCells", "Beam", "Devices"];
-  public floorNames = ["floor-0", "floor-1", "floor-2", "floor-3"];
+export class AppComponent implements OnInit {
+  public layers: string[] = [];
+  public floorNames: string[] = [];
   public viewMode = "isometric";
+
+  // Link to the site plan host directive in the HTML template
+  @ViewChild(SitePlanDirective, { static: true })
+  sitePlanHost!: SitePlanDirective;
+
+  constructor(
+    public apiService: ApiService,
+    public httpClient: HttpClient,
+    private compiler: Compiler
+  ) {
+    apiService.rootUrl = environment.configUrl + "/chronos-exporter";
+  }
+
+  ngOnInit() {
+    this.apiService
+      .getAetherConfiguration()
+      .pipe(
+        map((config: AetherModel) =>
+          config.sites.find((s: Site) => s["site-id"] === environment.site)
+        )
+      )
+      .subscribe(
+        (s) => {
+          // @ts-ignore
+          const sitePlans = s["site-plans"];
+          sitePlans?.layers?.forEach((l) => {
+            this.layers.push(l["layer-id"]);
+          });
+          sitePlans?.["site-plan-list"]?.forEach((sp) => {
+            this.floorNames.push(sp.id);
+            this.loadSvgAndCompile(sp.id, sp["svg-file"]);
+          });
+        },
+        (err) => console.warn("Error loading config", err),
+        () => {
+          console.log("layers loaded", this.layers);
+          console.log("site plans loaded", this.floorNames);
+        }
+      );
+  }
 
   public enableLayer(name: string, checked: boolean): void {
     if (checked && this.layers.indexOf(name) === -1) {
@@ -32,5 +87,23 @@ export class AppComponent {
     } else if (!checked && this.layers.indexOf(name) !== -1) {
       this.layers.splice(this.layers.indexOf(name), 1);
     }
+  }
+
+  private loadSvgAndCompile(id: string, location: string) {
+    console.log("Loading SVG", id, "from ", location);
+    this.httpClient
+      .get(environment.configUrl + location, {
+        headers: {
+          Accept: "image/svg-xml",
+        },
+        responseType: "text",
+      })
+      .subscribe(
+        (svgFile) => {
+          console.log("SVG loaded", svgFile.length, "bytes");
+        },
+        (err) => console.warn("Error loading SVG", id, "from", location, err),
+        () => console.log("Done loading SVG", id)
+      );
   }
 }

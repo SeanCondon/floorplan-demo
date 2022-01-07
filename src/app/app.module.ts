@@ -9,6 +9,7 @@ import { Floor2Component } from "./floor2/floor2.component";
 import { Floor3Component } from "./floor3/floor3.component";
 import { ReactiveFormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { SitePlanDirective } from './site-plan.directive';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
     Floor1Component,
     Floor2Component,
     Floor3Component,
+    SitePlanDirective,
   ],
   imports: [BrowserAnimationsModule, HttpClientModule, ReactiveFormsModule],
   providers: [],

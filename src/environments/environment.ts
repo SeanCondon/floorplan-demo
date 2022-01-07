@@ -4,6 +4,8 @@
 
 export const environment = {
   production: false,
+  configUrl: "http://aiabsean:8184/",
+  site: "freemont",
 };
 
 /*
