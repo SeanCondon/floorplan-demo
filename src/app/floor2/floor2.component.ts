@@ -14,15 +14,14 @@
  * limitations under the License.
  */
 
-import {Component, Input} from '@angular/core';
+import { Component, Input } from "@angular/core";
 
 // Floor0Component - this would be compiled dynamically in future
 @Component({
-    selector: '[app-floor2]',
-    templateUrl: './floor-2.svg',
-    styleUrls: []
+  selector: "[app-floor2]",
+  templateUrl: "./floor-2.svg",
+  styleUrls: [],
 })
 export class Floor2Component {
-    @Input() layers: string[] = [];
-
+  @Input() layers: string[] = [];
 }

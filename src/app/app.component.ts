@@ -14,23 +14,23 @@
  * limitations under the License.
  */
 
-import {Component, Input} from '@angular/core';
+import { Component } from "@angular/core";
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.scss']
+  selector: "aether-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.scss"],
 })
 export class AppComponent {
-    public layers: string[] = ['Walls','Text','SmallCells','Beam','Devices'];
-    public floorNames = ['floor-0', 'floor-1', 'floor-2', 'floor-3'];
-    public viewMode = "isometric";
+  public layers: string[] = ["Walls", "Text", "SmallCells", "Beam", "Devices"];
+  public floorNames = ["floor-0", "floor-1", "floor-2", "floor-3"];
+  public viewMode = "isometric";
 
-    public enableLayer(name: string, checked: boolean): void {
-        if (checked && this.layers.indexOf(name) === -1) {
-            this.layers.push(name);
-        } else if (!checked && this.layers.indexOf(name) !== -1) {
-            this.layers.splice(this.layers.indexOf(name), 1);
-        }
+  public enableLayer(name: string, checked: boolean): void {
+    if (checked && this.layers.indexOf(name) === -1) {
+      this.layers.push(name);
+    } else if (!checked && this.layers.indexOf(name) !== -1) {
+      this.layers.splice(this.layers.indexOf(name), 1);
     }
+  }
 }
