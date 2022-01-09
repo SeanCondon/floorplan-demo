@@ -14,51 +14,26 @@
 ~ limitations under the License.
 -->
 <h2>Floor Plan Demo</h2>
+<small>Configuration loaded from {{ configUrl }}</small>
+<br />
 <span><strong>Layers:</strong>&nbsp;</span>
 <!-- no need to toggle Walls -->
-<!--<input type="checkbox" #walls id="walls" name="walls" [checked]="layers.includes('Walls')" value="Walls" (click)="enableLayer(walls.value, walls.checked)">-->
-<!--<label for="walls">Walls</label>&nbsp;-->
-<input
-  type="checkbox"
-  #text
-  id="text"
-  name="text"
-  [checked]="layers.includes('Text')"
-  value="Text"
-  (click)="enableLayer(text.value, text.checked)"
-/>
-<label for="text">Text</label>&nbsp;
-<input
-  type="checkbox"
-  #smallcells
-  id="smallcells"
-  name="smallcells"
-  [checked]="layers.includes('SmallCells')"
-  value="SmallCells"
-  (click)="enableLayer(smallcells.value, smallcells.checked)"
-/>
-<label for="smallcells">Small Cells</label>&nbsp;
-<input
-  type="checkbox"
-  #beam
-  id="beam"
-  name="beam"
-  [checked]="layers.includes('Beam')"
-  value="Beam"
-  (click)="enableLayer(beam.value, beam.checked)"
-/>
-<label for="beam">Beam</label>&nbsp;
-<input
-  type="checkbox"
-  #devices
-  id="devices"
-  name="devices"
-  [checked]="layers.includes('Devices')"
-  value="Devices"
-  (click)="enableLayer(devices.value, devices.checked)"
-/>
-<label for="devices">Devices</label><br />
+<span *ngFor="let layer of layers">
+  <input
+    type="checkbox"
+    [id]="layer"
+    [name]="layer"
+    [checked]="layers.includes(layer)"
+    [value]="layer"
+    (click)="enableLayer($event)"
+  />
+  <label [for]="layer">{{ layer }}</label
+  >&nbsp;
+</span>
+<br />
+<small>TODO: Small-Cells, Devices and Beams will be drawn from config</small>
 
+<br />
 <span><strong>View Mode:</strong>&nbsp;</span>
 <span id="isometricRadio" (click)="viewMode = 'isometric'">
   <input
@@ -70,61 +45,28 @@
   />
   <label for="isometric">Isometric</label>&nbsp;
 </span>
-<span id="floor0Radio" (click)="viewMode = 'floor-0'">
+<span *ngFor="let fn of floorNames" (click)="viewMode = fn">
   <input
     type="radio"
-    id="floor-0"
+    [id]="fn"
     name="viewMode"
-    value="floor-0"
-    [checked]="viewMode === 'floor-0'"
+    [value]="fn"
+    [checked]="viewMode === fn"
   />
-  <label for="floor-0">Floor-0</label>&nbsp;
-</span>
-<span id="floor1Radio" (click)="viewMode = 'floor-1'">
-  <input
-    type="radio"
-    id="floor-1"
-    name="viewMode"
-    value="floor-1"
-    [checked]="viewMode === 'floor-1'"
-  />
-  <label for="floor-1">Floor-1</label>&nbsp;
-</span>
-<span id="floor2Radio" (click)="viewMode = 'floor-2'">
-  <input
-    type="radio"
-    id="floor-2"
-    name="viewMode"
-    value="floor-2"
-    [checked]="viewMode === 'floor-2'"
-  />
-  <label for="floor-2">Floor-2</label>&nbsp;
-</span>
-<span id="floor3Radio" (click)="viewMode = 'floor-3'">
-  <input
-    type="radio"
-    id="floor-3"
-    name="viewMode"
-    value="floor-3"
-    [checked]="viewMode === 'floor-3'"
-  />
-  <label for="floor-3">Floor-3</label><br />
+  <label [for]="fn">{{ fn }}</label
+  >&nbsp;
 </span>
 
 <svg:svg
   xmlns:svg="http://www.w3.org/2000/svg"
   viewBox="0 0 1150 800"
-  [attr.transform]="'translate(0, -150), scale(0.7,0.7)'"
+  [attr.transform]="'translate(0, -50), scale(0.7,0.7)'"
 >
   <svg:g
     app-floors
     [title]="'Building Demo'"
-    [layers]="layers"
-    [floorNames]="floorNames"
+    [layers]="activeLayers"
     [viewMode]="viewMode"
-    (floorSelectedEmitter)="viewMode = $event"
+    [sitePlans]="sitePlans"
   ></svg:g>
 </svg:svg>
-<p>Dynamically generated content</p>
-<ng-template sitePlanHost></ng-template>
-

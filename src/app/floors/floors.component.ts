@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { Component, Input } from "@angular/core";
 import {
   animate,
   state,
@@ -22,9 +22,7 @@ import {
   transition,
   trigger,
 } from "@angular/animations";
-
-const Isometric_Offset = -120;
-const TOP_BORDER = 0;
+import { SitePlan } from "../../openapi3/config/models/site-plan";
 
 @Component({
   selector: "[app-floors]",
@@ -54,26 +52,17 @@ const TOP_BORDER = 0;
 })
 export class FloorsComponent {
   @Input() title: string = "";
-  @Input() layers: string[] = [];
-  @Input() floorNames: string[] = [];
+  @Input() layers = new Array<string>();
+  @Input() sitePlans = new Map<string, SitePlan>();
   @Input() viewMode: string = "isometric";
-  @Output() floorSelectedEmitter = new EventEmitter<string>();
 
-  isoMetricOffset(floor: string): number {
-    if (this.viewMode != "isometric") {
-      return TOP_BORDER;
-    }
-    return TOP_BORDER + this.floorNames.indexOf(floor) * Isometric_Offset;
-  }
-
-  floorDisplay(floor: string): number {
-    if (["isometric", floor].includes(this.viewMode)) {
-      return 1;
+  public zOffset(sitePlan: SitePlan | undefined): number {
+    if (sitePlan && this.viewMode === "isometric") {
+      const sp = sitePlan as SitePlan;
+      if (sp.offsets) {
+        return sp.offsets["z-offset"];
+      }
     }
     return 0;
-  }
-
-  floorSelected(floor: string): void {
-    this.floorSelectedEmitter.emit(floor);
   }
 }

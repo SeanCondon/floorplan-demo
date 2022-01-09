@@ -14,22 +14,13 @@
  * limitations under the License.
  */
 
-import {
-  Compiler,
-  Component,
-  Input,
-  NgModule,
-  OnInit,
-  ViewChild,
-  ViewContainerRef,
-} from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { ApiService } from "../openapi3/config/services/api.service";
 import { AetherModel } from "../openapi3/config/models/aether-model";
 import { environment } from "../environments/environment";
 import { Site } from "../openapi3/config/models/site";
 import { map } from "rxjs/operators";
-import { HttpClient } from "@angular/common/http";
-import { SitePlanDirective } from "./site-plan.directive";
+import { SitePlan } from "../openapi3/config/models/site-plan";
 
 @Component({
   selector: "aether-root",
@@ -37,23 +28,18 @@ import { SitePlanDirective } from "./site-plan.directive";
   styleUrls: ["./app.component.scss"],
 })
 export class AppComponent implements OnInit {
-  public layers: string[] = [];
-  public floorNames: string[] = [];
+  public layers = ["Walls"];
+  public activeLayers = ["Walls"];
+
+  public floorNames = new Array<string>();
+  public sitePlans = new Map<string, SitePlan>();
   public viewMode = "isometric";
 
-  // Link to the site plan host directive in the HTML template
-  @ViewChild(SitePlanDirective, { static: true })
-  sitePlanHost!: SitePlanDirective;
-
-  constructor(
-    public apiService: ApiService,
-    public httpClient: HttpClient,
-    private compiler: Compiler
-  ) {
+  constructor(public apiService: ApiService) {
     apiService.rootUrl = environment.configUrl + "/chronos-exporter";
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.apiService
       .getAetherConfiguration()
       .pipe(
@@ -63,47 +49,47 @@ export class AppComponent implements OnInit {
       )
       .subscribe(
         (s) => {
-          // @ts-ignore
-          const sitePlans = s["site-plans"];
-          sitePlans?.layers?.forEach((l) => {
-            this.layers.push(l["layer-id"]);
-          });
-          sitePlans?.["site-plan-list"]?.forEach((sp) => {
-            this.floorNames.push(sp.id);
-            this.loadSvgAndCompile(sp.id, sp["svg-file"]);
-          });
+          if (s !== undefined) {
+            const sitePlans = s["site-plans"];
+            sitePlans?.layers?.forEach((l) => {
+              this.layers.push(l["layer-id"]);
+              this.activeLayers.push(l["layer-id"]);
+            });
+            sitePlans?.["site-plan-list"]?.forEach((sp) => {
+              this.floorNames.push(sp.id);
+              this.sitePlans.set(sp.id, sp);
+            });
+          }
         },
         (err) => console.warn("Error loading config", err),
         () => {
-          console.log("layers loaded", this.layers);
+          this.layers = [...this.layers];
+          this.activeLayers = [...this.activeLayers];
+          console.log(
+            "layers loaded",
+            this.layers,
+            "Active:",
+            this.activeLayers
+          );
           console.log("site plans loaded", this.floorNames);
         }
       );
   }
 
-  public enableLayer(name: string, checked: boolean): void {
-    if (checked && this.layers.indexOf(name) === -1) {
-      this.layers.push(name);
-    } else if (!checked && this.layers.indexOf(name) !== -1) {
-      this.layers.splice(this.layers.indexOf(name), 1);
+  public enableLayer(event: MouseEvent): void {
+    if (event !== null) {
+      const tgt = event.target as HTMLInputElement;
+      console.log("Enabling", tgt.checked, tgt.value);
+      if (tgt.checked && this.activeLayers.indexOf(tgt.value) === -1) {
+        this.activeLayers.push(tgt.value);
+      } else if (!tgt.checked && this.activeLayers.indexOf(tgt.value) !== -1) {
+        this.activeLayers.splice(this.activeLayers.indexOf(tgt.value), 1);
+      }
+      this.activeLayers = [...this.activeLayers];
     }
   }
 
-  private loadSvgAndCompile(id: string, location: string) {
-    console.log("Loading SVG", id, "from ", location);
-    this.httpClient
-      .get(environment.configUrl + location, {
-        headers: {
-          Accept: "image/svg-xml",
-        },
-        responseType: "text",
-      })
-      .subscribe(
-        (svgFile) => {
-          console.log("SVG loaded", svgFile.length, "bytes");
-        },
-        (err) => console.warn("Error loading SVG", id, "from", location, err),
-        () => console.log("Done loading SVG", id)
-      );
+  public get configUrl(): string {
+    return environment.configUrl;
   }
 }
