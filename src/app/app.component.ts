@@ -14,23 +14,82 @@
  * limitations under the License.
  */
 
-import {Component, Input} from '@angular/core';
+import { Component, OnInit } from "@angular/core";
+import { ApiService } from "../openapi3/config/services/api.service";
+import { AetherModel } from "../openapi3/config/models/aether-model";
+import { environment } from "../environments/environment";
+import { Site } from "../openapi3/config/models/site";
+import { map } from "rxjs/operators";
+import { SitePlan } from "../openapi3/config/models/site-plan";
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.scss']
+  selector: "aether-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.scss"],
 })
-export class AppComponent {
-    public layers: string[] = ['Walls','Text','SmallCells','Beam','Devices'];
-    public floorNames = ['floor-0', 'floor-1', 'floor-2', 'floor-3'];
-    public viewMode = "isometric";
+export class AppComponent implements OnInit {
+  public layers = ["Walls"];
+  public activeLayers = ["Walls"];
 
-    public enableLayer(name: string, checked: boolean): void {
-        if (checked && this.layers.indexOf(name) === -1) {
-            this.layers.push(name);
-        } else if (!checked && this.layers.indexOf(name) !== -1) {
-            this.layers.splice(this.layers.indexOf(name), 1);
+  public floorNames = new Array<string>();
+  public sitePlans = new Map<string, SitePlan>();
+  public viewMode = "isometric";
+
+  constructor(public apiService: ApiService) {
+    apiService.rootUrl = environment.configUrl + "/chronos-exporter";
+  }
+
+  ngOnInit(): void {
+    this.apiService
+      .getAetherConfiguration()
+      .pipe(
+        map((config: AetherModel) =>
+          config.sites.find((s: Site) => s["site-id"] === environment.site)
+        )
+      )
+      .subscribe(
+        (s) => {
+          if (s !== undefined) {
+            const sitePlans = s["site-plans"];
+            sitePlans?.layers?.forEach((l) => {
+              this.layers.push(l["layer-id"]);
+              this.activeLayers.push(l["layer-id"]);
+            });
+            sitePlans?.["site-plan-list"]?.forEach((sp) => {
+              this.floorNames.push(sp.id);
+              this.sitePlans.set(sp.id, sp);
+            });
+          }
+        },
+        (err) => console.warn("Error loading config", err),
+        () => {
+          this.layers = [...this.layers];
+          this.activeLayers = [...this.activeLayers];
+          console.log(
+            "layers loaded",
+            this.layers,
+            "Active:",
+            this.activeLayers
+          );
+          console.log("site plans loaded", this.floorNames);
         }
+      );
+  }
+
+  public enableLayer(event: MouseEvent): void {
+    if (event !== null) {
+      const tgt = event.target as HTMLInputElement;
+      console.log("Enabling", tgt.checked, tgt.value);
+      if (tgt.checked && this.activeLayers.indexOf(tgt.value) === -1) {
+        this.activeLayers.push(tgt.value);
+      } else if (!tgt.checked && this.activeLayers.indexOf(tgt.value) !== -1) {
+        this.activeLayers.splice(this.activeLayers.indexOf(tgt.value), 1);
+      }
+      this.activeLayers = [...this.activeLayers];
     }
+  }
+
+  public get configUrl(): string {
+    return environment.configUrl;
+  }
 }

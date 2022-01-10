@@ -1,3 +1,5 @@
 export const environment = {
-  production: true
+  production: true,
+  configUrl: "https://chronos-dev.onlab.us/chronos-exporter",
+  site: "freemont",
 };

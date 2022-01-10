@@ -14,61 +14,55 @@
  * limitations under the License.
  */
 
+import { Component, Input } from "@angular/core";
 import {
-    AfterViewInit,
-    Component, EventEmitter,
-    Input,
-    OnChanges, Output,
-    SimpleChanges,
-} from '@angular/core';
-import {animate, state, style, transition, trigger} from "@angular/animations";
-
-const Isometric_Offset = -120;
-const TOP_BORDER = 0;
+  animate,
+  state,
+  style,
+  transition,
+  trigger,
+} from "@angular/animations";
+import { SitePlan } from "../../openapi3/config/models/site-plan";
 
 @Component({
-    selector: '[app-floors]',
-    templateUrl: 'floors.component.svg',
-    styleUrls: ['./floors.component.scss'],
-    animations: [
-        trigger('isometricToggle', [
-            state('isometric', style({
-                transform: 'skewX(-40deg) skewY(10deg) translateX(600px) translateY(250px) scaleX(0.6) scaleY(0.4)'
-            })),
-            state('*', style({
-                transform: 'skewX(0deg) skewY(0deg) translateX(0px) translateY(0px) scaleX(1.0) scaleY(1.0)'
-            })),
-            // default
-            transition('isometric => *', animate('500ms ease-in')),
-            transition('* => isometric', animate('500ms ease-out'))
-        ])
-    ],
+  selector: "[app-floors]",
+  templateUrl: "floors.component.svg",
+  styleUrls: ["./floors.component.scss"],
+  animations: [
+    trigger("isometricToggle", [
+      state(
+        "isometric",
+        style({
+          transform:
+            "skewX(-40deg) skewY(10deg) translateX(600px) translateY(250px) scaleX(0.6) scaleY(0.4)",
+        })
+      ),
+      state(
+        "*",
+        style({
+          transform:
+            "skewX(0deg) skewY(0deg) translateX(0px) translateY(0px) scaleX(1.0) scaleY(1.0)",
+        })
+      ),
+      // default
+      transition("isometric => *", animate("500ms ease-in")),
+      transition("* => isometric", animate("500ms ease-out")),
+    ]),
+  ],
 })
 export class FloorsComponent {
-    @Input() title: string = '';
-    @Input() layers: string[] = [];
-    @Input() floorNames: string[] = [];
-    @Input() viewMode: string = "isometric";
-    @Output() floorSelectedEmitter = new EventEmitter<string>();
+  @Input() title: string = "";
+  @Input() layers = new Array<string>();
+  @Input() sitePlans = new Map<string, SitePlan>();
+  @Input() viewMode: string = "isometric";
 
-    constructor() {
+  public zOffset(sitePlan: SitePlan | undefined): number {
+    if (sitePlan && this.viewMode === "isometric") {
+      const sp = sitePlan as SitePlan;
+      if (sp.offsets) {
+        return sp.offsets["z-offset"];
+      }
     }
-
-    isoMetricOffset(floor: string): number {
-        if (this.viewMode != 'isometric') {
-            return TOP_BORDER;
-        }
-        return TOP_BORDER + this.floorNames.indexOf(floor) * Isometric_Offset;
-    }
-
-    floorDisplay(floor: string): number {
-        if (['isometric', floor].includes(this.viewMode)) {
-            return 1;
-        }
-        return 0;
-    }
-
-    floorSelected(floor: string): void {
-        this.floorSelectedEmitter.emit(floor);
-    }
+    return 0;
+  }
 }
