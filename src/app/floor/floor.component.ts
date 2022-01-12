@@ -57,8 +57,14 @@ export class FloorComponent implements OnInit {
             svgFile.length,
             "bytes)"
           );
-          this.structureLayerSvg = this.extractSvgLayer(svgFile, "Walls");
+          this.structureLayerSvg = this.extractSvgLayer(svgFile, "Structure");
+          if (this.structureLayerSvg === "") {
+            throw "Error extracting layer Structure\n" + svgFile
+          }
           this.textLayerSvg = this.extractSvgLayer(svgFile, "Text");
+          if (this.textLayerSvg === "") {
+            throw "Error extracting layer Text\n" + svgFile
+          }
         },
         (err) => console.warn("Error loading SVG", id, "from", location, err)
       );
@@ -67,7 +73,10 @@ export class FloorComponent implements OnInit {
   private extractSvgLayer(svg: string, layer: string): string {
     const walls1Pos = svg.indexOf('inkscape:label="' + layer + '"');
     const walls2Pos = svg.indexOf("<", walls1Pos);
-    const walls3Pos = svg.indexOf('inkscape:groupmode="layer"', walls1Pos);
+    let walls3Pos = svg.indexOf('inkscape:groupmode="layer"', walls1Pos);
+    if (walls3Pos < 0) {
+      walls3Pos = svg.indexOf('</svg>', walls1Pos);
+    }
     const walls4Pos = svg.lastIndexOf("</g>", walls3Pos);
     return svg.substr(walls2Pos, walls4Pos - walls2Pos);
   }

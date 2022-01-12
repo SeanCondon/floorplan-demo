@@ -84,9 +84,9 @@
   <g
      inkscape:groupmode="layer"
      id="layer6"
-     inkscape:label="Walls"
+     inkscape:label="Structure"
      [innerHTML]="structureLayerSafe"
-     [style]="layers.includes('Walls') ? 'display:inline' : 'display:none'">
+     [style]="layers.includes('Structure') ? 'display:inline' : 'display:none'">
   </g>
   <g
      inkscape:groupmode="layer"
