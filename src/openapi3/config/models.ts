@@ -1,4 +1,5 @@
 // GENERATED CODE -- DO NOT EDIT!
+export { Position } from './models/position';
 export { Application } from './models/application';
 export { Device } from './models/device';
 export { DeviceGroup } from './models/device-group';

@@ -28,8 +28,8 @@ import { SitePlan } from "../openapi3/config/models/site-plan";
   styleUrls: ["./app.component.scss"],
 })
 export class AppComponent implements OnInit {
-  public layers = ["Walls"];
-  public activeLayers = ["Walls"];
+  public layers = new Array<string>();
+  public activeLayers = new Array<string>();
 
   public floorNames = new Array<string>();
   public sitePlans = new Map<string, SitePlan>();
